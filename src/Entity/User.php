@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,10 +24,18 @@ class User
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Email(
+        message: "L'adresse mail {{ value }} n'est pas valide."
+    )]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+    #[Assert\EqualTo(
+        propertyPath: 'password',
+        message: 'Les mots de '
+    )]
+    public string $confirmPassword;
 
     public function getId(): ?int
     {
@@ -78,4 +89,45 @@ class User
 
         return $this;
     }
+    public function getUsername() {
+        return $this->getEmail();
+    }
+    /**
+	 * Returns the roles granted to the user.
+	 *
+	 * public function getRoles()
+	 * {
+	 * return ['ROLE_USER'];
+	 * }
+	 *
+	 * Alternatively, the roles might be stored in a ``roles`` property,
+	 * and populated in any number of different ways when the user object
+	 * is created.
+	 *
+	 * @return array
+	 */
+	function getRoles(): array {
+        return ["ROLE_ADMIN"];
+    }
+	
+	/**
+	 * Removes sensitive data from the user.
+	 *
+	 * This is important if, at any given point, sensitive information like
+	 * the plain-text password is stored on this object.
+	 *
+	 * @return mixed
+	 */
+	function eraseCredentials() {
+    }
+	
+	/**
+	 * Returns the identifier for this user (e.g. its username or email address).
+	 *
+	 * @return string
+	 */
+	function getUserIdentifier(): string {
+        return $this->getId();
+    }
+
 }
