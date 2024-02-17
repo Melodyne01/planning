@@ -15,6 +15,23 @@
 
     </head>
     <body>
+        <header>
+            <nav class="uk-navbar-container">
+                <div class="uk-container">
+                    <div uk-navbar>
+                            <div class="uk-navbar-center">
+                                <ul class="uk-navbar-nav">
+                                    <li><a href="{{path('home')}}">Home</a></li>
+                                    <li><a href="{{path('dashboard')}}">Mes activitiées</a></li>
+                                    <li><a href="{{path('addCategory')}}">Mes catégories</a></li>
+                                    <li><a href="{{path('login')}}">Mon compte</a></li>
+                                </ul>
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+            </nav>
+        </header>
         {% block body %}{% endblock %}
         {% block js %}{% endblock %}
     </body>

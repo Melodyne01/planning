@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\Activity;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -52,6 +53,19 @@ class ActivityRepository extends ServiceEntityRepository
         ->andWhere('a.createdBy = :user')
         ->setParameter('user', $user)
         ->orderBy('a.startedAt','DESC')
+        ->getQuery()
+        ->getResult();
+    }
+    
+    public function findAllDailyByUser(DateTime $start, DateTime $end, User $user): array
+    {
+    return $this->createQueryBuilder('a')
+        ->andWhere('a.createdBy = :user')
+        ->andWhere('(a.startedAt BETWEEN :start AND :end) OR (a.endedAt BETWEEN :start AND :end)')
+        ->setParameter('user', $user)
+        ->setParameter('start', $start)
+        ->setParameter('end', $end)
+        ->orderBy('a.startedAt', 'ASC')
         ->getQuery()
         ->getResult();
     }

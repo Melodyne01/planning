@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
 use App\Form\RegistrationType;
-use App\Repository\ActivityRepository;
 use App\Repository\UserRepository;
+use App\Repository\ActivityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +32,7 @@ class UserController extends AbstractController
         $this->passwordHasher = $passwordHasher;
         $this->activityRepo = $activityRepo;
     }
+    
     #[Route('/register', name: 'register')]
     public function register(Request $request): Response
     {
@@ -100,11 +102,76 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
 
-        $activities = $this->activityRepo->findAllByUser($user);
+        $yesterdayStart = new DateTime('Europe/Paris');
+        $yesterdayStart->modify('-1 day');
+        $yesterdayStart->setTime(0, 0, 0);
+
+        $yesterdayEnd = new DateTime('Europe/Paris');
+        $yesterdayEnd->modify('-1 day');
+        $yesterdayEnd->setTime(23, 59, 59);
+        $activitiesOfYesterday = $this->activityRepo->findAllDailyByUser($yesterdayStart, $yesterdayEnd, $user);
+
+        $todayStart = new DateTime('Europe/Paris');
+        $todayStart->setTime(0, 0, 0);
+
+        $todayEnd = new DateTime('Europe/Paris');
+        $todayEnd->setTime(23, 59, 59);
+        $activitiesOfToday = $this->activityRepo->findAllDailyByUser($todayStart, $todayEnd, $user);
+
+        $tomorrowStart = new DateTime('Europe/Paris');
+        $tomorrowStart->setTime(0, 0, 0);
+        $tomorrowStart->modify('+1 day');
+
+        $tomorrowEnd = new DateTime('Europe/Paris');
+        $tomorrowEnd->setTime(23, 59, 59);
+        $tomorrowEnd->modify('+1 day');
+        $activitiesOfTomorrow = $this->activityRepo->findAllDailyByUser($tomorrowStart, $tomorrowEnd, $user);
+
+        // Jour +2
+        $dayAfterTomorrowStart = new DateTime('Europe/Paris');
+        $dayAfterTomorrowStart->setTime(0, 0, 0);
+        $dayAfterTomorrowStart->modify('+2 days');
+
+        $dayAfterTomorrowEnd = new DateTime('Europe/Paris');
+        $dayAfterTomorrowEnd->setTime(23, 59, 59);
+        $dayAfterTomorrowEnd->modify('+2 days');
+        $activitiesOfTheDayAfterTomorrow = $this->activityRepo->findAllDailyByUser($dayAfterTomorrowStart, $dayAfterTomorrowEnd, $user);
+
+        // Jour +3
+        $twoDaysAfterTomorrowStart = new DateTime('Europe/Paris');
+        $twoDaysAfterTomorrowStart->setTime(0, 0, 0);
+        $twoDaysAfterTomorrowStart->modify('+3 days');
+
+        $twoDaysAfterTomorrowEnd = new DateTime('Europe/Paris');
+        $twoDaysAfterTomorrowEnd->setTime(23, 59, 59);
+        $twoDaysAfterTomorrowEnd->modify('+3 days');
+        $activitiesOfTwoDaysAfterTomorrow = $this->activityRepo->findAllDailyByUser($twoDaysAfterTomorrowStart, $twoDaysAfterTomorrowEnd, $user);
+
+        
+        // Jour +4
+        $threeDaysAfterTomorrowStart = new DateTime('Europe/Paris');
+        $threeDaysAfterTomorrowStart->setTime(0, 0, 0);
+        $threeDaysAfterTomorrowStart->modify('+4 days');
+
+        $threeDaysAfterTomorrowEnd = new DateTime('Europe/Paris');
+        $threeDaysAfterTomorrowEnd->setTime(23, 59, 59);
+        $threeDaysAfterTomorrowEnd->modify('+4 days');
+        $activitiesOfThreeDaysAfterTomorrow = $this->activityRepo->findAllDailyByUser($threeDaysAfterTomorrowStart, $threeDaysAfterTomorrowEnd, $user);
 
         return $this->render('/user/index.html.twig', [
             'user' => $user,
-            'activities' => $activities,
+            'activitiesOfYesterday' => $activitiesOfYesterday,
+            'activitiesOfToday' => $activitiesOfToday,
+            'activitiesOfTomorrow' => $activitiesOfTomorrow,
+            'activitiesOfTheDayAfterTomorrow' => $activitiesOfTheDayAfterTomorrow,
+            'activitiesOfTwoDaysAfterTomorrow' => $activitiesOfTwoDaysAfterTomorrow,
+            'activitiesOfThreeDaysAfterTomorrow' => $activitiesOfThreeDaysAfterTomorrow,
+            'yesterdayStart' => $yesterdayStart,
+            'todayStart' => $todayStart,
+            'tomorrowStart' => $tomorrowStart,
+            'dayAfterTomorrowStart' => $dayAfterTomorrowStart,
+            'twoDaysAfterTomorrowStart' => $twoDaysAfterTomorrowStart,
+            'threeDaysAfterTomorrowStart' => $threeDaysAfterTomorrowStart,
         ]);
     }
 
