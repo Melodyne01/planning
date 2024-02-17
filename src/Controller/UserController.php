@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\ActivityRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,15 +18,18 @@ class UserController extends AbstractController
     private $userRepo;
     private $manager;
     private $passwordHasher;
+    private $activityRepo;
 
     public function __construct(
         ManagerRegistry $manager,
         UserRepository $userRepo,
         UserPasswordHasherInterface $passwordHasher,
+        ActivityRepository $activityRepo
     ) {    
         $this->manager = $manager;
         $this->userRepo = $userRepo;
         $this->passwordHasher = $passwordHasher;
+        $this->activityRepo = $activityRepo;
     }
     #[Route('/register', name: 'register')]
     public function register(Request $request): Response
@@ -96,9 +100,11 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
 
+        $activities = $this->activityRepo->findAllByUser($user);
 
         return $this->render('/user/index.html.twig', [
             'user' => $user,
+            'activities' => $activities,
         ]);
     }
 

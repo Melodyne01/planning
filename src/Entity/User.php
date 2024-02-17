@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,6 +38,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         message: 'Les mots de passes ne correspondent pas'
     )]
     public string $confirmPassword;
+
+    #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'createdBy')]
+    private Collection $activities;
+
+    public function __construct()
+    {
+        $this->activities = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -110,8 +120,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	 * @return array
 	 */
 	function getRoles(): array {
-        return ["ROLE_ADMIN"];
-    }
+                                return ["ROLE_ADMIN"];
+                            }
 	
 	/**
 	 * Removes sensitive data from the user.
@@ -122,7 +132,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	 * @return mixed
 	 */
 	function eraseCredentials() {
-    }
+                            }
 	
 	/**
 	 * Returns the identifier for this user (e.g. its username or email address).
@@ -130,7 +140,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	 * @return string
 	 */
 	function getUserIdentifier(): string {
-        return $this->getId();
+                                return $this->getId();
+                            }
+
+    /**
+     * @return Collection<int, Activity>
+     */
+    public function getActivities(): Collection
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): static
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities->add($activity);
+            $activity->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): static
+    {
+        if ($this->activities->removeElement($activity)) {
+            // set the owning side to null (unless already changed)
+            if ($activity->getCreatedBy() === $this) {
+                $activity->setCreatedBy(null);
+            }
+        }
+
+        return $this;
     }
 
 }

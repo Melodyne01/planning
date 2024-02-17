@@ -37,7 +37,7 @@ class ActivitiesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            $activity->setCreatedBy($this->getUser());
             $this->manager->getManager()->persist($activity);
             $this->manager->getManager()->flush();
 
@@ -46,6 +46,26 @@ class ActivitiesController extends AbstractController
         }
 
         return $this->render('activities/addActivity.html.twig', [
+            "form" => $form->createView()
+        ]);
+    }
+    #[Route('/activity/edit/{id}', name: 'editActivity')]
+    public function editActivity(Activity $activity, Request $request): Response
+    {
+        $form = $this->createForm(CreateActivityType::class, $activity);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $activity->setCreatedBy($this->getUser());
+            $this->manager->getManager()->persist($activity);
+            $this->manager->getManager()->flush();
+
+            $this->addFlash("success", "La catégorie à bien été créé");
+            return $this->redirectToRoute('dashboard');            
+        }
+
+        return $this->render('activities/editActivity.html.twig', [
             "form" => $form->createView()
         ]);
     }

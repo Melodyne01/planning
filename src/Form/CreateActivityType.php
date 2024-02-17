@@ -8,6 +8,7 @@ use App\Repository\CategoryRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,20 +24,17 @@ class CreateActivityType extends AbstractType
             ->add('description', TextType::class, [
                 'attr' => ['class' => 'uk-input', 'placeholder' => 'Description'],
             ])
-            ->add('startedAt', DateType::class,[
+            ->add('startedAt', DateTimeType::class,[
                 'attr' => ['class' => 'uk-input'],
-                'format' => 'yyyy : MM : dd',
                 'data' => new \DateTime('Europe/Paris')
             ])
-            ->add('endedAt', DateType::class, [
+            ->add('endedAt', DateTimeType::class, [
                 'attr' => ['class' => 'uk-input'],
-                'format' => 'yyyy : MM : dd',
                 'data' => new \DateTime('Europe/Paris')
             ])
             ->add('category', EntityType::class, [
                     'class' => Category::class,
                     'choice_label' => 'name'
-                    
                 ])
         ;
     }

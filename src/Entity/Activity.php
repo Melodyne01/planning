@@ -29,6 +29,9 @@ class Activity
     #[ORM\ManyToOne(inversedBy: 'activities')]
     private ?Category $category = null;
 
+    #[ORM\ManyToOne(inversedBy: 'activities')]
+    private ?User $createdBy = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Activity
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): static
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

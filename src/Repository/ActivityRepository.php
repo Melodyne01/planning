@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Activity;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Activity>
@@ -45,4 +46,13 @@ class ActivityRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findAllByUser(User $user):array
+    {
+        return $this->createQueryBuilder('a')
+        ->andWhere('a.createdBy = :user')
+        ->setParameter('user', $user)
+        ->orderBy('a.startedAt','DESC')
+        ->getQuery()
+        ->getResult();
+    }
 }
