@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
     #[Assert\EqualTo(
         propertyPath: 'password',
-        message: 'Les mots de '
+        message: 'Les mots de passes ne correspondent pas'
     )]
     public string $confirmPassword;
 
@@ -91,6 +91,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
     public function getUsername() {
         return $this->getEmail();
+    }
+    public function __toString(){
+        return $this->firstname;
     }
     /**
 	 * Returns the roles granted to the user.

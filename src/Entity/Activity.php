@@ -27,7 +27,6 @@ class Activity
     private ?\DateTimeInterface $endedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'activities')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
     public function getId(): ?int

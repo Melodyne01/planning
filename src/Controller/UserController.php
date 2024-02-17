@@ -15,7 +15,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserController extends AbstractController
 {
     private $userRepo;
-    private $jwt;
     private $manager;
     private $passwordHasher;
 
