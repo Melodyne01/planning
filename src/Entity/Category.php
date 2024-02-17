@@ -21,6 +21,12 @@ class Category
     #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'category')]
     private Collection $activities;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $color = null;
+
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    private ?User $createdBy = null;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -69,6 +75,30 @@ class Category
                 $activity->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): static
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): static
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

@@ -37,6 +37,7 @@ class CategoriesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $category->setCreatedBy($this->getUser());
             
             $this->manager->getManager()->persist($category);
             $this->manager->getManager()->flush();

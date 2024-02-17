@@ -19,6 +19,17 @@
                     </div>
                 </div>
                 <div class="uk-width-1-1">
+                    {% if form_errors(form.color) %}
+                        <div class="formError">{{form_errors(form.color)}}</div>
+                    {% endif %}
+                    <div class="uk-margin">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon" uk-icon="icon: user"></span>
+                            {{ form_widget(form.color) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-1">
                     <button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Ajouter la categorie</button>
                 </div>
             {{ form_end(form) }}

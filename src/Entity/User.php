@@ -42,9 +42,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Activity::class, mappedBy: 'createdBy')]
     private Collection $activities;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $googleAuthenticatorSecret = null;
+
+    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'createdBy')]
+    private Collection $categories;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -120,8 +127,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	 * @return array
 	 */
 	function getRoles(): array {
-                                return ["ROLE_ADMIN"];
-                            }
+                                                        return ["ROLE_ADMIN"];
+                                                    }
 	
 	/**
 	 * Removes sensitive data from the user.
@@ -132,7 +139,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	 * @return mixed
 	 */
 	function eraseCredentials() {
-                            }
+                                                    }
 	
 	/**
 	 * Returns the identifier for this user (e.g. its username or email address).
@@ -140,8 +147,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	 * @return string
 	 */
 	function getUserIdentifier(): string {
-                                return $this->getId();
-                            }
+                                                        return $this->getId();
+                                                    }
 
     /**
      * @return Collection<int, Activity>
@@ -167,6 +174,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($activity->getCreatedBy() === $this) {
                 $activity->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+    public function isGoogleAuthenticatorEnabled(): bool
+   {
+       return null !== $this->googleAuthenticatorSecret;
+   }
+
+   public function getGoogleAuthenticatorUsername(): string
+   {
+       return $this->email;
+   }
+
+    public function getGoogleAuthenticatorSecret(): ?string
+    {
+        return $this->googleAuthenticatorSecret;
+    }
+
+    public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): static
+    {
+        $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): static
+    {
+        if ($this->categories->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getCreatedBy() === $this) {
+                $category->setCreatedBy(null);
             }
         }
 

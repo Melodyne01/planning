@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,6 +16,14 @@ class CreateCategoryType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'attr' => ['class' => 'uk-input', 'placeholder' => 'Category'],
+            ])
+            ->add('color', ChoiceType::class, [
+                'choices' => [
+                    "Bleu" => "Blue",
+                    "Orange" => "Orange",
+                    "Red" => "Red",
+                ],
+                'attr' => ['class' => 'uk-input', 'placeholder' => 'Couleur'],
             ])
         ;
     }
