@@ -147,7 +147,6 @@ class UserController extends AbstractController
         $twoDaysAfterTomorrowEnd->modify('+3 days');
         $activitiesOfTwoDaysAfterTomorrow = $this->activityRepo->findAllDailyByUser($twoDaysAfterTomorrowStart, $twoDaysAfterTomorrowEnd, $user);
 
-        
         // Jour +4
         $threeDaysAfterTomorrowStart = new DateTime('Europe/Paris');
         $threeDaysAfterTomorrowStart->setTime(0, 0, 0);

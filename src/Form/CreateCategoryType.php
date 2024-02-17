@@ -19,9 +19,11 @@ class CreateCategoryType extends AbstractType
             ])
             ->add('color', ChoiceType::class, [
                 'choices' => [
-                    "Bleu" => "Blue",
-                    "Orange" => "Orange",
-                    "Red" => "Red",
+                    "Bleu" => "blue",
+                    "Orange" => "orange",
+                    "Rouge" => "red",
+                    "Vert" => "green",
+                    "Gris" => "grey",
                 ],
                 'attr' => ['class' => 'uk-input', 'placeholder' => 'Couleur'],
             ])

@@ -1,18 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-<link href="{{ asset('css/user/index.css') }}" rel="stylesheet" />
-
-{% endblock %}
-
 {% block body %}
 <div class="uk-container">
+  <div class="errorMessage">
+    {% for message in app.flashes("danger") %}
+    <div class="uk-alert-danger" uk-alert>
+        <a href class="uk-alert-close" uk-close></a>
+        <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+    {% for message in app.flashes("success") %}
+    <div class="uk-alert-success" uk-alert>
+        <a href class="uk-alert-close" uk-close></a>
+        <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+</div>
+<div class="uk-margin">
+  <a href="{{path('addActivity')}}" class="uk-button uk-button-primary">Ajouter une activitée</a> 
+</div>
   <ul class="uk-subnav uk-subnav-pill" uk-switcher>
     <li><a href="#">Aujourd'hui</a></li>
     <li><a href="#">Cette semaine</a></li>
-    <li><a href="#">Item</a></li>
 </ul>
-
 <ul class="uk-switcher uk-margin">
     <li>
       <div class="uk-section">
@@ -51,8 +61,6 @@
           {% endfor %}
           </div>
       </div>
-        
-
     </li>
     <li>
       <div class="uk-section">
@@ -70,7 +78,7 @@
             <br>
             {% else %}
               <div class="uk-card uk-card-body uk-card-muted">
-                <h3 class="uk-card-title">Pas d'activités enregistrées pour hier </h3>
+                <h3 class="uk-card-title">Pas d'activités enregistrées hier </h3>
               </div>
           {% endfor %}
           </div>
@@ -158,7 +166,6 @@
       </div>
       </div>
     </li>
-    <li>Bazinga!</li>
 </ul>
 
 </div>
