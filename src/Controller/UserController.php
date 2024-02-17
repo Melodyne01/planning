@@ -18,14 +18,6 @@ class UserController extends AbstractController
     private $jwt;
     private $manager;
     private $passwordHasher;
-    private $mail;
-    private $supplierRepo;
-    private $invoiceRepo;
-    private $statusRepo;
-    private $companyRepo;
-    private $employeeRepo;
-    private $productRepo;
-    private $clientRepo;
 
     public function __construct(
         ManagerRegistry $manager,
@@ -98,6 +90,17 @@ class UserController extends AbstractController
             //Envoie des données vers la base de données
             $this->manager->getManager()->flush(); 
         }
+    }
+
+    #[Route('/user/dashboard', name: 'dashboard')]
+    public function dashboard(): Response
+    {
+        $user = $this->getUser();
+
+
+        return $this->render('/user/index.html.twig', [
+            'user' => $user,
+        ]);
     }
 
 }
