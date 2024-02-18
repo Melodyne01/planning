@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Activity;
 use App\Form\CreateActivityType;
+use App\Form\EditActivityType;
 use App\Repository\ActivityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +58,7 @@ class ActivitiesController extends AbstractController
     #[Route('/activity/edit/{id}', name: 'editActivity')]
     public function editActivity(Activity $activity, Request $request): Response
     {
-        $form = $this->createForm(CreateActivityType::class, $activity);
+        $form = $this->createForm(EditActivityType::class, $activity);
 
         $form->handleRequest($request);
 
@@ -69,7 +70,7 @@ class ActivitiesController extends AbstractController
             $this->addFlash("success", "L'activité à bien été modifiée");
             return $this->redirectToRoute('dashboard');            
         }
-        return $this->render('activities/editActivity.html.twig', [
+        return $this->render('activities/edit.html.twig', [
             "form" => $form->createView(),
             "activity" => $activity
         ]);
