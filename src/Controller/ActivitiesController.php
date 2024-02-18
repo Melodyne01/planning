@@ -150,9 +150,41 @@ class ActivitiesController extends AbstractController
             $totalSportTime[$activity->getCategory()->getParent()] += $duration->h + ($duration->i / 60);
         }
 
+        // Création d'une liste de plages horaires disponibles pour la journée
+        $plagesHorairesDisponibles = [
+            ['start' => new DateTime('Europe/Paris 00:00:00'), 'end' => new DateTime('Europe/Paris 23:59:59')]
+        ];
 
+        // Parcours de toutes les activités existantes et marquage des plages horaires correspondantes comme non disponibles
+        foreach ($activitiesOfTomorrow as $activity) {
+            $start = $activity->getStartedAt();
+            $end = $activity->getEndedAt();
+
+            // Suppression des plages horaires qui chevauchent l'activité
+            for ($i = 0; $i < count($plagesHorairesDisponibles); $i++) {
+                $plage = $plagesHorairesDisponibles[$i];
+
+                // Vérification du chevauchement
+                if ($start < $plage['end'] && $end > $plage['start']) {
+                    // Divise la plage horaire en deux si elle chevauche l'activité
+                    if ($start > $plage['start']) {
+                        // La partie avant l'activité
+                        $plagesHorairesDisponibles[$i]['end'] = $start;
+                    }
+                    if ($end < $plage['end']) {
+                        // La partie après l'activité
+                        array_splice($plagesHorairesDisponibles, $i + 1, 0, [['start' => $end, 'end' => $plage['end']]]);
+                        $plagesHorairesDisponibles[$i]['end'] = $end;
+                    }
+                }
+            }
+        }
         if ($totalSportTime['Sport'] < 3){
-            $this->addFlash("danger", "Ajouter du sport");
+            if($plagesHorairesDisponibles[0]){
+                $this->addFlash("danger", "Votre agenda semble manquer de sport : Le 1er horaire disponible est le ".$plagesHorairesDisponibles[0]['start']->format('d M à H:i'));
+            }else{
+                $this->addFlash("danger", "Ajouter du sport");
+            }
         }
         else if ($totalSportTime['Famille'] < 1){
             $this->addFlash("danger", "Ajouter de la famille");
