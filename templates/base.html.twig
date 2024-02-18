@@ -17,6 +17,7 @@
 
     </head>
     <body>
+        {% if app.user %}
         <header>
             <nav class="uk-navbar-container uk-navbar-transparent">
                 <div class="uk-container uk-navbar-transparent">
@@ -27,7 +28,7 @@
                                     <li><a href="{{path('dashboard')}}">Ma journée</a></li>
                                     <li><a href="{{path('weekly')}}">Ma semaine</a></li>
                                     <li><a href="{{path('addCategory')}}">Mes catégories</a></li>
-                                    <li><a href="{{path('login')}}">Mon compte</a></li>
+                                    <li><a href="{{path('logout')}}">Me déconnecter</a></li>
                                 </ul>
                             </div>
                         </div>        
@@ -35,6 +36,18 @@
                 </div>
             </nav>
         </header>
+        {% else %}
+        <nav class="uk-navbar-container ">
+            <div class="uk-container ">
+                <div uk-navbar>
+                    <div class="uk-navbar-center">
+                        <a class="uk-navbar-item uk-logo" href="{{path('home')}}"><b>Askaway</b></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% endif %}
+        
         {% block body %}{% endblock %}
         {% block js %}{% endblock %}
     </body>

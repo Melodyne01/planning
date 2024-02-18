@@ -67,6 +67,7 @@
             <tr>
                 <th>Nom</th>
                 <th>Couleur</th>
+                <th>Catégorie</th>
                 <th>Modifier</th>
             </tr>
         </thead>
@@ -75,6 +76,7 @@
             <tr>
                 <td class="{{category.color}}">{{category.name}}</td>
                 <td class="{{category.color}}">{{category.color}}</td>
+                <td class="{{category.color}}">{{category.parent}}</td>
                 <td class="{{category.color}} text-white"><a href="{{path('editCategory', {id:category.id})}}">Modifier</a></td>
             </tr>
                 {% endfor %}
