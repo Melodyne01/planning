@@ -1,0 +1,141 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;    
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    
+}
+section {
+    padding: 20px;
+    text-align: center;
+}
+section input, section button {
+	border-radius:15px;
+}
+input {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #99cc00;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200px ;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Ajouter un peu d'espace pour le bouton de connexion */
+button + button {
+    margin-top: 10px;
+}
+
+section {
+    padding: 20px;
+    text-align: center;
+    width: 63%;
+    margin: 0 auto;
+}
+
+.image-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: max-content;
+}
+
+.image-left img {
+    max-width: 50%;
+    margin-right: 5%;
+}
+
+.image-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-right img {
+    max-width: 50%;
+    margin-left: 10%;
+}
+.section-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction:row; /* Inverser l'ordre des éléments */
+}
+
+.section-right .content {
+    text-align: center; /* Aligner le texte à gauche */
+    max-width: 50%; /* Limiter la largeur du contenu */
+}
+
+.section-right img {
+
+    max-width: 30%; /* Réduire la largeur de l'image à 40% */
+    margin-left: 10%; /* Ajouter un espacement entre l'image et le texte */
+}
+
+footer {
+    background-color: #99cc00;
+    color: #fffdfd;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.content h1 {
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #99cc00;
+}
+
+
+
+
+@media only screen and (max-width: 100%) {
+    section {
+        width: 100%;
+    }
+
+    .image-left img,
+    .image-right img {
+        max-width: 100%;
+        margin: 0;
+        flex: 1;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    button + button {
+        margin-top: 10px;
+    }
+
+    /* Consider using a mobile-friendly navigation menu */
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        margin: 5px 0;
+    }
+    
+
+}

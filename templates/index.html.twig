@@ -1,21 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Controller!{% endblock %}
+{% block stylesheets %}
+<link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/main.css') }}" rel="stylesheet" />
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/tangu/symfonyProjects/planning/src/Controller/Controller.php</code></li>
-        <li>Your template at <code>C:/Users/tangu/symfonyProjects/planning/templates//index.html.twig</code></li>
-    </ul>
-</div>
-<a href="{{path('register')}}">Login</a>
+<div class="uk-child-width-1-1@s" uk-grid>
+    <div>
+        <div class="uk-background-cover uk-height-custom-large uk-panel uk-flex uk-flex-center uk-flex-middle" uk-parallax="bgy: -500" style="background-image: url(images/bg.jpg);">
+            <div class="overlay">
+                <div class="uk-container">
+                    <div class="uk-card uk-card-transparent uk-card-large uk-card-body uk-width-1-2@m" uk-scrollspy="cls: uk-animation-slide-left; repeat: false">
+                        <h1 class="headingText">Parce que vous n'avez pas le temps</h1>
+                        <p class="uk-padding-large headingText uk-padding-remove-left uk-padding-remove-right">Laissez-nous vous aider à libérer votre temps. Avec notre assistance dédiée, vous pouvez vous concentrer sur ce qui compte vraiment pour vous</p>
+                        <a href="#contact" class="uk-button uk-width-1-2 uk-border-rounded uk-align-left uk-button-primary"><b>Nous contacter</b></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+    <div>
+        <section class="section-right">
+            <div class="content">
+                <h1>Harmonisez votre quotidien avec Askaway ?</h1>
+                <p>Askaway vous permet d'intégrer des moments dédiés à la détente dans votre emploi du temps parfois surchargé, vous aidant ainsi à améliorer votre bien-être global. 
+                En insérant ces pauses régulières dans votre routine quotidienne, vous favorisez la relaxation, la créativité et la résilience face au stress. Prendre soin de votre bien-être mental est essentiel pour une vie équilibrée et épanouissante. 
+                Choisissez Askaway Calendar pour une approche proactive de votre santé mentale.</p>
+            </div>
+            <img src="{{ asset('/images/fille.jpg')}}" width="50%" height="50%">
+        </section>
+        <section class="content">
+            <h1>Commencez dès aujourd'hui!</h1>
+            <p>Connectez-vous ou inscrivez-vous pour commencer à optimiser votre calendrier.</p>
+            <div>
+                <a href="login.html"><button>Se connecter</button></a>
+                <a href="sign.html"><button>S'inscrire</button></a>
+            </div>
+        </section>
+        <hr class="uk-divider-icon">
+        <section class="image-left">
+            <img src="{{ asset('/images/image-1.jpg')}}" alt="Deux personnes d'age mur en train de faire du sport">
+            <div class="content">
+                <h1>Askaway Calendar</h1>
+                <p>Optimisez votre emploi du temps pour une meilleure santé mentale et physique.</p>
+            </div>
+        </section>
+    </div>    
+    <footer>
+        <div class="conteneur">
+          <p>© Askaway - Tous droits réservés</p>
+        </div>
+    </footer>
 {% endblock %}

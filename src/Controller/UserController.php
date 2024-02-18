@@ -102,6 +102,37 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
 
+        $todayStart = new DateTime('Europe/Paris');
+        $todayStart->setTime(0, 0, 1);
+
+        $todayEnd = new DateTime('Europe/Paris');
+        $todayEnd->setTime(23, 59, 59);
+        $activitiesOfToday = $this->activityRepo->findAllDailyByUser($todayStart, $todayEnd, $user);
+
+        $tomorrowStart = new DateTime('Europe/Paris');
+        $tomorrowStart->setTime(0, 0, 1);
+        $tomorrowStart->modify('+1 day');
+
+        $tomorrowEnd = new DateTime('Europe/Paris');
+        $tomorrowEnd->setTime(23, 59, 59);
+        $tomorrowEnd->modify('+1 day');
+        $activitiesOfTomorrow = $this->activityRepo->findAllDailyByUser($tomorrowStart, $tomorrowEnd, $user);
+
+        
+        return $this->render('/user/index.html.twig', [
+            'user' => $user,
+            'activitiesOfToday' => $activitiesOfToday,
+            'activitiesOfTomorrow' => $activitiesOfTomorrow,
+            'todayStart' => $todayStart,
+            'tomorrowStart' => $tomorrowStart->modify('+1 day'),
+        ]);
+    }
+    
+    #[Route('/user/dashboard/weekly', name: 'weekly')]
+    public function weekly(): Response
+    {
+        $user = $this->getUser();
+
         $yesterdayStart = new DateTime('Europe/Paris');
         $yesterdayStart->modify('-1 day');
         $yesterdayStart->setTime(0, 0, 1);
@@ -157,7 +188,7 @@ class UserController extends AbstractController
         $threeDaysAfterTomorrowEnd->modify('+4 days');
         $activitiesOfThreeDaysAfterTomorrow = $this->activityRepo->findAllDailyByUser($threeDaysAfterTomorrowStart, $threeDaysAfterTomorrowEnd, $user);
 
-        return $this->render('/user/index.html.twig', [
+        return $this->render('/user/weekly.html.twig', [
             'user' => $user,
             'activitiesOfYesterday' => $activitiesOfYesterday,
             'activitiesOfToday' => $activitiesOfToday,
@@ -165,12 +196,12 @@ class UserController extends AbstractController
             'activitiesOfTheDayAfterTomorrow' => $activitiesOfTheDayAfterTomorrow,
             'activitiesOfTwoDaysAfterTomorrow' => $activitiesOfTwoDaysAfterTomorrow,
             'activitiesOfThreeDaysAfterTomorrow' => $activitiesOfThreeDaysAfterTomorrow,
-            'yesterdayStart' => $yesterdayStart,
+            'yesterdayStart' => $yesterdayStart->modify('+1 day'),
             'todayStart' => $todayStart,
-            'tomorrowStart' => $tomorrowStart,
-            'dayAfterTomorrowStart' => $dayAfterTomorrowStart,
-            'twoDaysAfterTomorrowStart' => $twoDaysAfterTomorrowStart,
-            'threeDaysAfterTomorrowStart' => $threeDaysAfterTomorrowStart,
+            'tomorrowStart' => $tomorrowStart->modify('+1 day'),
+            'dayAfterTomorrowStart' => $dayAfterTomorrowStart->modify('+1 day'),
+            'twoDaysAfterTomorrowStart' => $twoDaysAfterTomorrowStart->modify('+1 day'),
+            'threeDaysAfterTomorrowStart' => $threeDaysAfterTomorrowStart->modify('+1 day'),
         ]);
     }
 

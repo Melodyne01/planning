@@ -16,163 +16,55 @@
     </div>
     {% endfor %}
 </div>
-<div class="uk-margin">
-  <a href="{{path('addActivity')}}" class="uk-button uk-button-primary">Ajouter une activitée</a> 
+<div class="uk-margin uk-width-1-1">
+  <a href="{{path('addActivity')}}" class="uk-button uk-width-1-1 uk-button-primary">Ajouter une activitée</a> 
 </div>
-  <ul class="uk-subnav uk-subnav-pill" uk-switcher>
-    <li><a href="#">Aujourd'hui</a></li>
-    <li><a href="#">Cette semaine</a></li>
-</ul>
-<ul class="uk-switcher uk-margin">
-    <li>
-  <a href="{{path('dailyAnalysis')}}" class="uk-button uk-button-primary">Analyser mon planning</a> 
+<div class="uk-margin uk-width-1-1">
+  <a href="{{path('dailyAnalysis')}}" class="uk-button uk-width-1-1 uk-button-primary">Analyser mon planning</a> 
+</div>
 
-      <div class="uk-section">
-        <div class="uk-text-lefy" uk-grid>
-          <div class="uk-width-1-2">
-            <h2>Aujourd'hui</h2>
-            {% for activity in activitiesOfToday %}
-              <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
-                <h3 class="uk-card-title">{{activity.title}} </h3>
-                
-                <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
-                <div class="uk-position-bottom-right">{{activity.endedAt|date('Y:m:d H:i')}}</div>
-              </div>
-              <br>
-              {% else %}
-              <div class="uk-card uk-card-body uk-card-muted">
-                <h3 class="uk-card-title">Pas d'activités enregistrées pour aujourd'hui </h3>
-              </div>
-            {% endfor %}
+<div class="uk-section">
+  <div class="uk-text-lefy" uk-grid>
+    <div class="uk-width-1-2">
+      <h2>Aujourd'hui</h2>
+      {% for activity in activitiesOfToday %}
+        <div class="uk-inline uk-width-1-1">
+          <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
+          <div uk-dropdown>
+            <p class="uk-text-truncate">{{activity.title}}</p>
+            <p>{{activity.description}}</p>
+            <p>Début : {{activity.startedAt|date('H:i')}}</p>
+            <p>Fin : {{activity.endedAt|date('H:i')}}</p>
           </div>
-          <div class="uk-width-1-2">
-            <h2>Demain</h2>
-            
-            {% for activity in activitiesOfTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
-              <h3 class="uk-card-title">{{activity.title}} </h3>
-              <div class="uk-margin"></div>
-              <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
-              <div class="uk-position-bottom-right">{{activity.endedAt|date('Y:m:d H:i')}}</div>
-            </div>
-            <br>
-            {% else %}
-              <div class="uk-card uk-card-body uk-card-muted">
-                <h3 class="uk-card-title">Pas d'activités enregistrées pour aujourd'hui </h3>
-              </div>
-          {% endfor %}
-          </div>
+        </div>
+        <br>
+        {% else %}
+        <div class="uk-card uk-card-body uk-card-muted">
+          <h3 class="uk-card-title">Pas d'activités enregistrées pour aujourd'hui </h3>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="uk-width-1-2">
+      <h2>Demain</h2>
+      
+      {% for activity in activitiesOfTomorrow %}
+      <div class="uk-inline uk-width-1-1">
+        <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
+        <div uk-dropdown>
+          <p>{{activity.description}}</p>
+          <p>Début : {{activity.startedAt|date('H:i')}}</p>
+          <p>Fin : {{activity.endedAt|date('H:i')}}</p>
+        </div>
       </div>
-    </li>
-    <li>
-  <a href="{{path('weeklyAnalysis')}}" class="uk-button uk-button-primary">Analyser mon planning</a> 
-
-      <div class="uk-section">
-        <div uk-grid>
-          <div class="uk-width-1-6">
-            <h2>Hier</h2>
-            {% for activity in activitiesOfYesterday %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
-              <h3 class="uk-card-title">{{activity.title}} </h3>
-              <div class="uk-margin"></div>
-              <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
-              <div class="uk-position-bottom-right">{{activity.endedAt|date('Y:m:d H:i')}}</div>
-
-            </div>
-            <br>
-            {% else %}
-              <div class="uk-card uk-card-body uk-card-muted">
-                <h3 class="uk-card-title">Pas d'activités enregistrées hier </h3>
-              </div>
-          {% endfor %}
-          </div>
-          <div class="uk-width-1-6">
-            <h2>Aujourd'hui</h2>
-            {% for activity in activitiesOfToday %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
-              <h3 class="uk-card-title">{{activity.title}} </h3>
-              <div class="uk-margin"></div>
-              <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
-              <div class="uk-position-bottom-right">{{activity.endedAt|date('Y:m:d H:i')}}</div>
-
-            </div>
-            <br>
-            {% else %}
-              <div class="uk-card uk-card-body uk-card-muted">
-                <h3 class="uk-card-title">Pas d'activités enregistrées pour aujourd'hui </h3>
-              </div>
-          {% endfor %}
-          </div>
-          <div class="uk-width-1-6">
-            <h2>Demain</h2>
-            {% for activity in activitiesOfTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
-              <h3 class="uk-card-title">{{activity.title}} </h3>
-              <div class="uk-margin"></div>
-              <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
-              <div class="uk-position-bottom-right">{{activity.endedAt|date('Y:m:d H:i')}}</div>
-            </div>
-            <br>
-            {% else %}
-              <div class="uk-card uk-card-body uk-card-muted">
-                <h3 class="uk-card-title">Pas d'activités enregistrées pour le {{tomorrowStart |date('d M')}} </h3>
-              </div>
-          {% endfor %}
-          </div>
-          <div class="uk-width-1-6">
-            <h2>{{dayAfterTomorrowStart |date('d M')}}</h2>
-            {% for activity in activitiesOfTheDayAfterTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
-              <h3 class="uk-card-title">{{activity.title}} </h3>
-              <div class="uk-margin"></div>
-              <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
-              <div class="uk-position-bottom-right">{{activity.endedAt|date('Y:m:d H:i')}}</div>
-            </div>
-            <br>
-            {% else %}
-              <div class="uk-card uk-card-body uk-card-muted">
-                <h3 class="uk-card-title">Pas d'activités enregistrées pour le {{dayAfterTomorrowStart |date('d M')}} </h3>
-              </div>
-          {% endfor %}
-          </div>
-          <div class="uk-width-1-6">
-            <h2>{{twoDaysAfterTomorrowStart |date('d M')}}</h2>
-            {% for activity in activitiesOfTwoDaysAfterTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
-              <h3 class="uk-card-title">{{activity.title}} </h3>
-              <div class="uk-margin"></div>
-              <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
-              <div class="uk-position-bottom-right">{{activity.endedAt|date('Y:m:d H:i')}}</div>
-            </div>
-            <br>
-            {% else %}
-              <div class="uk-card uk-card-body uk-card-muted">
-                <h3 class="uk-card-title">Pas d'activités enregistrées pour le {{twoDaysAfterTomorrowStart |date('d M')}} </h3>
-              </div>
-          {% endfor %}
-          </div>
-          <div class="uk-width-1-6">
-            <h2>{{threeDaysAfterTomorrowStart |date('d M')}}</h2>
-            {% for activity in activitiesOfThreeDaysAfterTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
-              <h3 class="uk-card-title">{{activity.title}} </h3>
-              <div class="uk-margin"></div>
-              <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
-              <div class="uk-position-bottom-right">{{activity.endedAt|date('Y:m:d H:i')}}</div>
-            </div>
-            <br>
-            {% else %}
-              <div class="uk-card uk-card-body uk-card-muted">
-                <h3 class="uk-card-title">Pas d'activités enregistrées pour le {{threeDaysAfterTomorrowStart |date('d M')}} </h3>
-              </div>
-          {% endfor %}
-          </div>
-      </div>
-      </div>
-    </li>
-</ul>
-
+        <br>
+      {% else %}
+        <div class="uk-card uk-card-body uk-card-muted">
+          <h3 class="uk-card-title">Pas d'activités enregistrées pour aujourd'hui </h3>
+        </div>
+    {% endfor %}
+    </div>
 </div>
 </div>
+
 {% endblock %}
 
