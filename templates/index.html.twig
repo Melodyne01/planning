@@ -14,7 +14,7 @@
                     <div class="uk-card uk-card-transparent uk-card-large uk-card-body uk-width-1-2@m" uk-scrollspy="cls: uk-animation-slide-left; repeat: false">
                         <h1 class="headingText">Parce que vous n'avez pas le temps</h1>
                         <p class="uk-padding-large headingText uk-padding-remove-left uk-padding-remove-right">Laissez-nous vous aider à libérer votre temps. Avec notre assistance dédiée, vous pouvez vous concentrer sur ce qui compte vraiment pour vous</p>
-                        <a href="#contact" class="uk-button uk-width-1-2 uk-border-rounded uk-align-left uk-button-primary"><b>Nous contacter</b></a>
+                        <a href="{{path('register')}}" class="uk-button uk-width-1-2 uk-border-rounded uk-align-left uk-button-primary"><b>Commencer</b></a>
                     </div>
                 </div>
             </div>
@@ -35,8 +35,8 @@
             <h1>Commencez dès aujourd'hui!</h1>
             <p>Connectez-vous ou inscrivez-vous pour commencer à optimiser votre calendrier.</p>
             <div>
-                <a href="login.html"><button>Se connecter</button></a>
-                <a href="sign.html"><button>S'inscrire</button></a>
+                <a href="{{path('register')}}"><button>S'inscrire</button></a>
+                <a href="{{path('register')}}"><button>Se connecter</button></a>
             </div>
         </section>
         <hr class="uk-divider-icon">

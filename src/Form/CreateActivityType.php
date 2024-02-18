@@ -17,6 +17,11 @@ class CreateActivityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // Crée un objet DateTime représentant la date actuelle
+        $date = new \DateTime('Europe/Paris');
+
+        // Avance la date d'une heure
+        $date->modify('+1 hour');
         $builder
             ->add('title', TextType::class, [
                 'attr' => ['class' => 'uk-input', 'placeholder' => 'Titre'],
@@ -31,11 +36,12 @@ class CreateActivityType extends AbstractType
             ])
             ->add('endedAt', DateTimeType::class, [
                 'attr' => ['class' => 'uk-input'],
-                'data' => new \DateTime('Europe/Paris')
+                'data' => $date 
             ])
             ->add('category', EntityType::class, [
                     'class' => Category::class,
-                    'choice_label' => 'name'
+                    'choice_label' => 'name',
+                    'attr' => ['class' => 'uk-input'],
                 ])
         ;
     }

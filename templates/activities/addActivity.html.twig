@@ -12,7 +12,7 @@
                         {% endif %}
                         <div class="uk-margin">
                             <div class="uk-inline uk-width-1-1">
-                                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                <span class="uk-form-icon" uk-icon="icon: hashtag"></span>
                                 {{ form_widget(form.title) }}
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                         {% endif %}
                         <div class="uk-margin">
                             <div class="uk-inline uk-width-1-1">
-                                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                <span class="uk-form-icon" uk-icon="icon: comment"></span>
                                 {{ form_widget(form.description) }}
                             </div>
                         </div>
@@ -34,29 +34,31 @@
                         {% endif %}
                         <div class="uk-margin">
                             <div class="uk-inline uk-width-1-1">
-                                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                <span class="uk-form-icon" uk-icon="icon: tag"></span>
                                 {{ form_widget(form.category) }}
                             </div>
                         </div>
                     </div>
-                    <div class="uk-width-1-1">
-                        {% if form_errors(form.startedAt) %}
-                            <div class="formError">{{form_errors(form.startedAt)}}</div>
-                        {% endif %}
-                        <div class="uk-margin">
-                            <div class="uk-inline uk-width-1-1">
-                                <span class="uk-form-icon" uk-icon="icon: user"></span>
-                                {{ form_widget(form.startedAt) }}
+                    <div class="date">
+                        <div class="uk-width-1-1">
+                            {% if form_errors(form.startedAt) %}
+                                <div class="formError">{{form_errors(form.startedAt)}}</div>
+                            {% endif %}
+                            <div class="uk-margin">
+                                <div class="uk-inline uk-width-1-1">
+                                    <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+                                    {{ form_widget(form.startedAt) }}
+                                </div>
                             </div>
-                        </div>
-                    <div class="uk-width-1-1">
-                        {% if form_errors(form.endedAt) %}
-                            <div class="formError">{{form_errors(form.endedAt)}}</div>
-                        {% endif %}
-                        <div class="uk-margin">
-                            <div class="uk-inline uk-width-1-1">
-                                <span class="uk-form-icon" uk-icon="icon: user"></span>
-                                {{ form_widget(form.endedAt) }}
+                        <div class="uk-width-1-1">
+                            {% if form_errors(form.endedAt) %}
+                                <div class="formError">{{form_errors(form.endedAt)}}</div>
+                            {% endif %}
+                            <div class="uk-margin">
+                                <div class="uk-inline uk-width-1-1">
+                                    <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+                                    {{ form_widget(form.endedAt) }}
+                                </div>
                             </div>
                         </div>
                     </div>

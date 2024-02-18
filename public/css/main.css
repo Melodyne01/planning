@@ -76,12 +76,16 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: left;
     flex-direction:row; /* Inverser l'ordre des éléments */
 }
 
 .section-right .content {
-    text-align: center; /* Aligner le texte à gauche */
+    text-align: left; /* Aligner le texte à gauche */
     max-width: 50%; /* Limiter la largeur du contenu */
+}
+.section-right .content p{
+    text-align: justify; /* Aligner le texte à gauche */
 }
 
 .section-right img {

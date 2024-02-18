@@ -1,5 +1,5 @@
 .red{
-  background-color: red;
+  background-color: rgb(164, 13, 13);
   color: white;
 }
 .blue{
@@ -8,14 +8,17 @@
 }
 .orange{
   background-color: #F88B00;
-  color: black;
+  color: white;
 }
 .grey{
   background-color: #4b5559;
-  color: black;
+  color: white;
 }
 .green{
-  background-color: green;
+  background-color: #99cc00;
+  color: white;
+}
+a{
   color: white;
 }
 .uk-height-custom-large{
@@ -37,4 +40,14 @@
 .uk-card-primary, .uk-section-primary, .uk-button-primary, .uk-subnav .uk-active a{
   background-color: #99cc00;
   color:  white;
+}
+.text-white{
+  color: white;
+}
+.date select{
+  display: inline-flex;
+  border: none;
+}
+.date .uk-input{
+  padding-bottom: 75px;
 }

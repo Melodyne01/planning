@@ -56,4 +56,25 @@ class CategoriesController extends AbstractController
             "categories" => $categories,
         ]);
     }
+    #[Route('/category/edit/{id}', name: 'editCategory')]
+    public function editCategory(Category $category, Request $request): Response
+    {
+        $form = $this->createForm(CreateCategoryType::class, $category);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $this->manager->getManager()->persist($category);
+            $this->manager->getManager()->flush();
+
+            $this->addFlash("success", "La catégorie à bien été modifiée");
+            return $this->redirectToRoute('addCategory');            
+        }
+
+        return $this->render('categories/editCategory.html.twig', [
+            "form" => $form->createView(),
+            "category" => $category
+        ]);
+    }
 }

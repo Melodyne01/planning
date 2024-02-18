@@ -31,7 +31,6 @@
         <div class="uk-inline uk-width-1-1">
           <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
           <div uk-dropdown>
-            <p class="uk-text-truncate">{{activity.title}}</p>
             <p>{{activity.description}}</p>
             <p>Début : {{activity.startedAt|date('H:i')}}</p>
             <p>Fin : {{activity.endedAt|date('H:i')}}</p>

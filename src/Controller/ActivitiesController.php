@@ -66,12 +66,12 @@ class ActivitiesController extends AbstractController
             $this->manager->getManager()->persist($activity);
             $this->manager->getManager()->flush();
 
-            $this->addFlash("success", "L'activité à bien été créé");
+            $this->addFlash("success", "L'activité à bien été modifiée");
             return $this->redirectToRoute('dashboard');            
         }
-
         return $this->render('activities/editActivity.html.twig', [
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "activity" => $activity
         ]);
     }
 
