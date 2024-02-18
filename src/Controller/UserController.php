@@ -104,7 +104,7 @@ class UserController extends AbstractController
 
         $yesterdayStart = new DateTime('Europe/Paris');
         $yesterdayStart->modify('-1 day');
-        $yesterdayStart->setTime(0, 0, 0);
+        $yesterdayStart->setTime(0, 0, 1);
 
         $yesterdayEnd = new DateTime('Europe/Paris');
         $yesterdayEnd->modify('-1 day');
@@ -112,14 +112,14 @@ class UserController extends AbstractController
         $activitiesOfYesterday = $this->activityRepo->findAllDailyByUser($yesterdayStart, $yesterdayEnd, $user);
 
         $todayStart = new DateTime('Europe/Paris');
-        $todayStart->setTime(0, 0, 0);
+        $todayStart->setTime(0, 0, 1);
 
         $todayEnd = new DateTime('Europe/Paris');
         $todayEnd->setTime(23, 59, 59);
         $activitiesOfToday = $this->activityRepo->findAllDailyByUser($todayStart, $todayEnd, $user);
 
         $tomorrowStart = new DateTime('Europe/Paris');
-        $tomorrowStart->setTime(0, 0, 0);
+        $tomorrowStart->setTime(0, 0, 1);
         $tomorrowStart->modify('+1 day');
 
         $tomorrowEnd = new DateTime('Europe/Paris');
@@ -129,7 +129,7 @@ class UserController extends AbstractController
 
         // Jour +2
         $dayAfterTomorrowStart = new DateTime('Europe/Paris');
-        $dayAfterTomorrowStart->setTime(0, 0, 0);
+        $dayAfterTomorrowStart->setTime(0, 0, 1);
         $dayAfterTomorrowStart->modify('+2 days');
 
         $dayAfterTomorrowEnd = new DateTime('Europe/Paris');
@@ -139,7 +139,7 @@ class UserController extends AbstractController
 
         // Jour +3
         $twoDaysAfterTomorrowStart = new DateTime('Europe/Paris');
-        $twoDaysAfterTomorrowStart->setTime(0, 0, 0);
+        $twoDaysAfterTomorrowStart->setTime(0, 0, 1);
         $twoDaysAfterTomorrowStart->modify('+3 days');
 
         $twoDaysAfterTomorrowEnd = new DateTime('Europe/Paris');
@@ -149,7 +149,7 @@ class UserController extends AbstractController
 
         // Jour +4
         $threeDaysAfterTomorrowStart = new DateTime('Europe/Paris');
-        $threeDaysAfterTomorrowStart->setTime(0, 0, 0);
+        $threeDaysAfterTomorrowStart->setTime(0, 0, 1);
         $threeDaysAfterTomorrowStart->modify('+4 days');
 
         $threeDaysAfterTomorrowEnd = new DateTime('Europe/Paris');

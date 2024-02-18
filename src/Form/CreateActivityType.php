@@ -23,6 +23,7 @@ class CreateActivityType extends AbstractType
             ])
             ->add('description', TextType::class, [
                 'attr' => ['class' => 'uk-input', 'placeholder' => 'Description'],
+                'required' => false
             ])
             ->add('startedAt', DateTimeType::class,[
                 'attr' => ['class' => 'uk-input'],

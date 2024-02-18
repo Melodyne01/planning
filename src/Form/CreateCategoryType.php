@@ -27,6 +27,16 @@ class CreateCategoryType extends AbstractType
                 ],
                 'attr' => ['class' => 'uk-input', 'placeholder' => 'Couleur'],
             ])
+            ->add('parent', ChoiceType::class, [
+                'choices' => [
+                    'Sport' => 'Sport',
+                    'Loisirs' => 'Loisirs',
+                    'Travail' => 'Travail',
+                    'Famille' => 'Famille',
+                    'Autre' => 'Autre',
+                ],
+                'expanded' => true,
+            ]);
         ;
     }
 

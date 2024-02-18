@@ -25,12 +25,14 @@
 </ul>
 <ul class="uk-switcher uk-margin">
     <li>
+  <a href="{{path('dailyAnalysis')}}" class="uk-button uk-button-primary">Analyser mon planning</a> 
+
       <div class="uk-section">
         <div class="uk-text-lefy" uk-grid>
           <div class="uk-width-1-2">
             <h2>Aujourd'hui</h2>
             {% for activity in activitiesOfToday %}
-              <div class="uk-card uk-card-primary uk-card-body {{activity.category.color}}">
+              <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
                 <h3 class="uk-card-title">{{activity.title}} </h3>
                 
                 <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
@@ -47,7 +49,7 @@
             <h2>Demain</h2>
             
             {% for activity in activitiesOfTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color}}">
+            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
               <h3 class="uk-card-title">{{activity.title}} </h3>
               <div class="uk-margin"></div>
               <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
@@ -63,12 +65,14 @@
       </div>
     </li>
     <li>
+  <a href="{{path('dailyAnalysis')}}" class="uk-button uk-button-primary">Analyser mon planning</a> 
+
       <div class="uk-section">
         <div uk-grid>
           <div class="uk-width-1-6">
             <h2>Hier</h2>
             {% for activity in activitiesOfYesterday %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color}}">
+            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
               <h3 class="uk-card-title">{{activity.title}} </h3>
               <div class="uk-margin"></div>
               <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
@@ -85,7 +89,7 @@
           <div class="uk-width-1-6">
             <h2>Aujourd'hui</h2>
             {% for activity in activitiesOfToday %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color}}">
+            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
               <h3 class="uk-card-title">{{activity.title}} </h3>
               <div class="uk-margin"></div>
               <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
@@ -102,7 +106,7 @@
           <div class="uk-width-1-6">
             <h2>Demain</h2>
             {% for activity in activitiesOfTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color}}">
+            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
               <h3 class="uk-card-title">{{activity.title}} </h3>
               <div class="uk-margin"></div>
               <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
@@ -118,7 +122,7 @@
           <div class="uk-width-1-6">
             <h2>{{dayAfterTomorrowStart |date('d M')}}</h2>
             {% for activity in activitiesOfTheDayAfterTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color}}">
+            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
               <h3 class="uk-card-title">{{activity.title}} </h3>
               <div class="uk-margin"></div>
               <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
@@ -134,7 +138,7 @@
           <div class="uk-width-1-6">
             <h2>{{twoDaysAfterTomorrowStart |date('d M')}}</h2>
             {% for activity in activitiesOfTwoDaysAfterTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color}}">
+            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
               <h3 class="uk-card-title">{{activity.title}} </h3>
               <div class="uk-margin"></div>
               <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>
@@ -150,7 +154,7 @@
           <div class="uk-width-1-6">
             <h2>{{threeDaysAfterTomorrowStart |date('d M')}}</h2>
             {% for activity in activitiesOfThreeDaysAfterTomorrow %}
-            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color}}">
+            <div class="uk-card uk-card-primary uk-card-body {{activity.category.color ?? ''}}">
               <h3 class="uk-card-title">{{activity.title}} </h3>
               <div class="uk-margin"></div>
               <div class="uk-position-bottom-left">{{activity.startedAt|date('Y:m:d H:i')}}</div>

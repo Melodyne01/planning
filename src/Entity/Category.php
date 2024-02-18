@@ -27,6 +27,9 @@ class Category
     #[ORM\ManyToOne(inversedBy: 'categories')]
     private ?User $createdBy = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $parent = null;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -99,6 +102,18 @@ class Category
     public function setCreatedBy(?User $createdBy): static
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getParent(): ?string
+    {
+        return $this->parent;
+    }
+
+    public function setParent(string $parent): static
+    {
+        $this->parent = $parent;
 
         return $this;
     }
