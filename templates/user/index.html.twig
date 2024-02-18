@@ -16,12 +16,15 @@
     </div>
     {% endfor %}
 </div>
-<div class="uk-margin uk-width-1-1">
-  <a href="{{path('addActivity')}}" class="uk-button uk-width-1-1 uk-button-primary">Ajouter une activitée</a> 
+<div class="uk-text-center" uk-grid>
+  <div class="uk-width-1-2">
+    <a href="{{path('addActivity')}}" class="uk-button uk-width-1-1 uk-button-primary">Ajouter une activitée</a> 
+  </div>
+  <div class="uk-width-1-2">
+    <a href="{{path('dailyAnalysis')}}" class="uk-button uk-width-1-1 uk-button-primary">Analyser mon planning</a> 
+  </div>
 </div>
-<div class="uk-margin uk-width-1-1">
-  <a href="{{path('dailyAnalysis')}}" class="uk-button uk-width-1-1 uk-button-primary">Analyser mon planning</a> 
-</div>
+<hr>
 
 <div class="uk-section">
   <div class="uk-text-lefy" uk-grid>
@@ -29,7 +32,7 @@
       <h2>Aujourd'hui</h2>
       {% for activity in activitiesOfToday %}
         <div class="uk-inline uk-width-1-1">
-          <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
+          <a href="{{path('editActivity', {id:activity.id})}}" class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </a>
           <div uk-dropdown>
             <p>{{activity.description}}</p>
             <p>Début : {{activity.startedAt|date('H:i')}}</p>
@@ -48,7 +51,7 @@
       
       {% for activity in activitiesOfTomorrow %}
       <div class="uk-inline uk-width-1-1">
-        <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
+        <a href="{{path('editActivity', {id:activity.id})}}" class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </a>
         <div uk-dropdown>
           <p>{{activity.description}}</p>
           <p>Début : {{activity.startedAt|date('H:i')}}</p>

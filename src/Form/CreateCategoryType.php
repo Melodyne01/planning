@@ -32,7 +32,6 @@ class CreateCategoryType extends AbstractType
                     'Sport' => 'Sport',
                     'Loisirs' => 'Loisirs',
                     'Travail' => 'Travail',
-                    'Famille' => 'Famille',
                     'Autre' => 'Autre',
                 ],
                 'expanded' => true,

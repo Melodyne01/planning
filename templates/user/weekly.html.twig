@@ -16,19 +16,22 @@
     </div>
     {% endfor %}
 </div>
-<div class="uk-margin uk-width-1-1">
-  <a href="{{path('addActivity')}}" class="uk-button uk-width-1-1 uk-button-primary">Ajouter une activitée</a>
+<div class="uk-text-center" uk-grid>
+  <div class="uk-width-1-2">
+    <a href="{{path('addActivity')}}" class="uk-button uk-width-1-1 uk-button-primary">Ajouter une activitée</a> 
+  </div>
+  <div class="uk-width-1-2">
+    <a href="{{path('weeklyAnalysis')}}" class="uk-button uk-width-1-1 uk-button-primary">Analyser mon planning</a> 
+  </div>
 </div>
-<div class="uk-margin uk-width-1-1">
-  <a href="{{path('weeklyAnalysis')}}" class="uk-button uk-width-1-1 uk-button-primary">Analyser mon planning</a> 
-</div>
+<hr>
 <div class="uk-section">
   <div uk-grid>
     <div class="uk-width-1-6">
       <h2>Hier</h2>
       {% for activity in activitiesOfYesterday %}
       <div class="uk-inline uk-width-1-1">
-        <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
+        <a href="{{path('editActivity', {id:activity.id})}}" class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </a>
         <div uk-dropdown>
           <p>{{activity.description}}</p>
           <p>Début : {{activity.startedAt|date('H:i')}}</p>
@@ -64,7 +67,7 @@
       <h2>Demain</h2>
       {% for activity in activitiesOfTomorrow %}
       <div class="uk-inline uk-width-1-1">
-        <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
+        <a href="{{path('editActivity', {id:activity.id})}}" class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </a>
         <div uk-dropdown>
           <p>{{activity.description}}</p>
           <p>Début : {{activity.startedAt|date('H:i')}}</p>
@@ -80,7 +83,7 @@
       <h2>{{dayAfterTomorrowStart |date('d M')}}</h2>
       {% for activity in activitiesOfTheDayAfterTomorrow %}
       <div class="uk-inline uk-width-1-1">
-        <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
+        <a href="{{path('editActivity', {id:activity.id})}}" class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </a>
         <div uk-dropdown>
           <p>{{activity.description}}</p>
           <p>Début : {{activity.startedAt|date('H:i')}}</p>
@@ -98,7 +101,7 @@
       <h2>{{twoDaysAfterTomorrowStart |date('d M')}}</h2>
       {% for activity in activitiesOfTwoDaysAfterTomorrow %}
       <div class="uk-inline uk-width-1-1">
-        <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
+        <a href="{{path('editActivity', {id:activity.id})}}" class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </a>
         <div uk-dropdown>
           <p>{{activity.description}}</p>
           <p>Début : {{activity.startedAt|date('H:i')}}</p>
@@ -116,7 +119,7 @@
       <h2>{{threeDaysAfterTomorrowStart |date('d M')}}</h2>
       {% for activity in activitiesOfThreeDaysAfterTomorrow %}
       <div class="uk-inline uk-width-1-1">
-        <button class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </button>
+        <a href="{{path('editActivity', {id:activity.id})}}" class="uk-button uk-width-1-1 uk-button-default uk-border-rounded {{activity.category.color ?? ''}}"  type="button">{{activity.title}} </a>
         <div uk-dropdown>
           <p>{{activity.description}}</p>
           <p>Début : {{activity.startedAt|date('H:i')}}</p>

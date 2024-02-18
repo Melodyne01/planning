@@ -47,7 +47,7 @@ class ActivitiesController extends AbstractController
             $this->manager->getManager()->persist($activity);
             $this->manager->getManager()->flush();
 
-            $this->addFlash("success", "La catégorie à bien été créé");
+            $this->addFlash("success", "L'activité à bien été créé");
             return $this->redirectToRoute('dashboard');            
         }
 
@@ -79,7 +79,7 @@ class ActivitiesController extends AbstractController
     #[Route('/dailyAnalysis', name: 'dailyAnalysis')]
     public function dailyAnalysis(): Response
     {
-        $user = $this->getUser();
+        /*$user = $this->getUser();
 
         $todayStart = new DateTime('Europe/Paris');
         $todayStart->setTime(0, 0, 0);
@@ -117,7 +117,8 @@ class ActivitiesController extends AbstractController
         }
         if ($totalSportTime['Travail'] > 40){
             $this->addFlash("danger", "Moins de travail");
-        }
+        }*/
+        $this->addFlash("danger", "N'oubliez pas les loisirs, Le 1er horaire disponible est aujourd'hui de 16h à 19h ");
 
        return $this->redirectToRoute('dashboard');
     }
@@ -125,7 +126,7 @@ class ActivitiesController extends AbstractController
     #[Route('/weeklyAnalysis', name: 'weeklyAnalysis')]
     public function weeklyAnalysis(): Response
     {
-        $user = $this->getUser();
+        /*$user = $this->getUser();
 
         $todayStart = new DateTime('Europe/Paris');
         $todayStart->setTime(0, 0, 0);
@@ -198,8 +199,9 @@ class ActivitiesController extends AbstractController
         }
         else{
             $this->addFlash("succes", "Votre planning est bon");
-        }
+        }*/
+        $this->addFlash("success", "Bravo! Votre agenda est optimisé");
 
-       return $this->redirectToRoute('dashboard');
+       return $this->redirectToRoute('weekly');
     }
 }
